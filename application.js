@@ -31,8 +31,8 @@ app.use('/stats', counters.router);
 // Important that this is last!
 app.use(mbaasExpress.errorHandler());
 
-var port = process.env.FH_PORT || process.env.VCAP_APP_PORT || 8001;
-
-app.listen(port, function() {
+var port = process.env.FH_PORT || process.env.OPENSHIFT_NODEJS_PORT || process.env.VCAP_APP_PORT || 8001;
+var host = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+app.listen(port, host, function() {
   log.info('app started on port: %s', port);
 });
